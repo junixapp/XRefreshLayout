@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lxj.xrefreshlayout.XRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/xrefreshLayout"
+    android:layout_height="match_parent">
+    
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/dog"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="260dp" />
+            
+            <TextView
+                android:background="#0ac01d"
+                android:textColor="#fff"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="I am text in NestedScrollView!"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <Button
+                android:textAllCaps="false"
+                android:text="Button in NestedScrollView!"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:background="#c1d"
+                android:textColor="#fff"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:text="Another text in NestedScrollView!"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+            
+        </LinearLayout>
+        
+    </android.support.v4.widget.NestedScrollView>
+
+</com.lxj.xrefreshlayout.XRefreshLayout>
