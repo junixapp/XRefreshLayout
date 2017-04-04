@@ -51,9 +51,11 @@ allprojects {
 
 **Step 2.** **Add the dependency**
 
+ [![](https://jitpack.io/v/li-xiaojun/XRefreshLayout.svg)](https://jitpack.io/#li-xiaojun/XRefreshLayout)
+
 ```groovy
 dependencies {
-	compile 'com.github.li-xiaojun:XRefreshLayout:1.0.0'
+	compile 'com.github.li-xiaojun:XRefreshLayout:lastest release here'
 }
 ```
 
