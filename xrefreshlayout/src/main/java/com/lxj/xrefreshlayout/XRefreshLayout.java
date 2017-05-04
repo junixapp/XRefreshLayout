@@ -118,6 +118,13 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
         return super.dispatchTouchEvent(ev) ;
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction()==MotionEvent.ACTION_UP){
+            L.d("action up -------------------->");
+        }
+        return super.onTouchEvent(event);
+    }
 
     @Override
     public void onNestedScrollAccepted(View child, View target, int axes) {
@@ -128,7 +135,7 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         isPullHeader = false;
         isPullFooter = false;
-        return true && !isSmoothScrolling;
+        return true;
     }
 
     /**
@@ -138,7 +145,8 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
      */
     @Override
     public void onStopNestedScroll(View child) {
-        L.d("onStopNestedScroll, isPullHeader: "+isPullHeader +"  isPullFooter:"+isPullFooter );
+        L.d("onStopNestedScroll  isRelease:"+isRelease + "   isPullHeader:"+isPullHeader
+        +"  isPullFooter: "+isPullFooter);
         isRelease = true;
         if (isPullHeader) {
             if (getScrollY() <= -header.getMeasuredHeight()) {
@@ -171,6 +179,11 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
                 int dy = 0 - getScrollY();
                 smoothScroll(dy);
             }
+        }else {
+            //hide footer smoothly.
+            isNeedInitLoadingLayout = true;
+            int dy = 0 - getScrollY();
+            smoothScroll(dy);
         }
     }
 
@@ -273,7 +286,7 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
             float percent = Math.abs(y) * 1f / footer.getMeasuredHeight();
             percent = Math.min(percent, 1f);
             if(!isRelease){
-                loadingLayout.onPullFooter(Math.min(percent, 1f));
+                loadingLayout.onPullFooter(percent);
             }
         }
         super.scrollTo(x, y);

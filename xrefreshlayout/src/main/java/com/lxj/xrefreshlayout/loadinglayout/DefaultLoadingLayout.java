@@ -64,13 +64,13 @@ public class DefaultLoadingLayout implements ILoadingLayout {
 
     @Override
     public void onPullHeader(float percent) {
-        tvHeaderState.setText("释放立即刷新");
+        tvHeaderState.setText(percent==1f?"释放立即刷新":"下拉刷新");
         ivHeaderArrow.setRotation(360*percent);
     }
 
     @Override
     public void onPullFooter(float percent) {
-        tvFooterState.setText("释放立即加载");
+        tvFooterState.setText(percent==1f?"释放立即加载":"上拉加载");
         ivFooterArrow.setRotation(360*percent);
     }
 
