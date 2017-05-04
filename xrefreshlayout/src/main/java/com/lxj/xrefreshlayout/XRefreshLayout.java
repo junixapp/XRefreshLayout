@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Px;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -116,14 +115,6 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if(isSmoothScrolling)return true;
         return super.dispatchTouchEvent(ev) ;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction()==MotionEvent.ACTION_UP){
-            L.d("action up -------------------->");
-        }
-        return super.onTouchEvent(event);
     }
 
     @Override
@@ -325,13 +316,6 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
      * complete the refresh state!
      */
     public void completeRefresh() {
-        if (isPullFooter && refreshView instanceof RecyclerView) {
-            RecyclerView recyclerView = (RecyclerView) refreshView;
-            if (recyclerView.getAdapter() != null) {
-                recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
-            }
-        }
-
         isNeedInitLoadingLayout = true;
         smoothScroll(0 - getScrollY());
 
