@@ -70,7 +70,6 @@ public class DefaultLoadingLayout implements ILoadingLayout {
 
     @Override
     public void onPullFooter(float percent) {
-        L.d("footer percent ： "+percent);
         tvFooterState.setText("释放立即加载");
         ivFooterArrow.setRotation(360*percent);
     }

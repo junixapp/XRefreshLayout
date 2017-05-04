@@ -36,6 +36,9 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
     private OverScroller scroller;
     private boolean isNeedInitLoadingLayout = false;
 
+    boolean isRelease = false;
+    private boolean isSmoothScrolling = false;
+
     public XRefreshLayout(Context context) {
         this(context, null);
     }
@@ -110,6 +113,13 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(isSmoothScrolling)return true;
+        return super.dispatchTouchEvent(ev) ;
+    }
+
+
+    @Override
     public void onNestedScrollAccepted(View child, View target, int axes) {
         isRelease = false;
     }
@@ -118,10 +128,8 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         isPullHeader = false;
         isPullFooter = false;
-        return true;
+        return true && !isSmoothScrolling;
     }
-
-    boolean isRelease = false;
 
     /**
      * when release from XRefreshLayout!
@@ -130,6 +138,7 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
      */
     @Override
     public void onStopNestedScroll(View child) {
+        L.d("onStopNestedScroll, isPullHeader: "+isPullHeader +"  isPullFooter:"+isPullFooter );
         isRelease = true;
         if (isPullHeader) {
             if (getScrollY() <= -header.getMeasuredHeight()) {
@@ -248,9 +257,11 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
 
             //call percent
             float percent = Math.abs(y) * 1f / header.getMeasuredHeight();
+            percent = Math.min(percent, 1f);
             if(!isRelease){
-                loadingLayout.onPullHeader(Math.min(percent, 1f));
+                loadingLayout.onPullHeader(percent);
             }
+
         } else if (isPullFooter) {
             if (y > getFooterScrollRange()) {
                 y = getFooterScrollRange();
@@ -260,6 +271,7 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
 
             //call percent
             float percent = Math.abs(y) * 1f / footer.getMeasuredHeight();
+            percent = Math.min(percent, 1f);
             if(!isRelease){
                 loadingLayout.onPullFooter(Math.min(percent, 1f));
             }
@@ -271,6 +283,7 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
     @Override
     public void computeScroll() {
         super.computeScroll();
+        isSmoothScrolling = isRelease && Math.abs(scroller.getCurrY())>8;
         if (scroller.computeScrollOffset()) {
             scrollTo(scroller.getCurrX(), scroller.getCurrY());
             ViewCompat.postInvalidateOnAnimation(this);

@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class L {
     private static final String TAG = "XRefreshLayout";
-    private static boolean isDebug = true;
+    public static boolean isDebug = false;
     public static void d(String msg){
         if(isDebug){
             Log.d(TAG,msg);
