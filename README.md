@@ -65,6 +65,40 @@ dependencies {
 
 # Get Start
 
+- make your layout
+
+  ```xml
+  <com.lxj.xrefreshlayout.XRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:id="@+id/xrefreshLayout"
+      android:layout_height="match_parent">
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recyclerview"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+  </com.lxj.xrefreshlayout.XRefreshLayout>
+  ```
+
+  或者
+
+  ```xml
+  <com.lxj.xrefreshlayout.XRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:id="@+id/xrefreshLayout"
+      android:layout_height="match_parent">
+
+      <android.support.v4.widget.NestedScrollView
+          android:id="@+id/recyclerview"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+  </com.lxj.xrefreshlayout.XRefreshLayout>
+  ```
+
+  ​
+
 - set refresh listener
 
   ```java
