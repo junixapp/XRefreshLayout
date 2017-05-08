@@ -24,6 +24,9 @@ public class DefaultLoadingLayout implements ILoadingLayout {
     private ImageView ivFooterProgress,ivFooterArrow;
     private TextView tvHeaderState,tvFooterState;
 
+    private AnimationDrawable footerAnimdrawable;
+    private AnimationDrawable headerAnimationDrawable;
+
     @Override
     public View createLoadingHeader(Context context,ViewGroup parent) {
         headerView = LayoutInflater.from(context).inflate(R.layout.xrl_default_header, parent, false);
@@ -48,8 +51,12 @@ public class DefaultLoadingLayout implements ILoadingLayout {
         ivHeaderArrow.setVisibility(View.VISIBLE);
         ivHeaderArrow.setRotation(0);
         ivHeaderProgress.setVisibility(View.INVISIBLE);
-        AnimationDrawable drawable = (AnimationDrawable) ivHeaderProgress.getBackground();
-        drawable.stop();
+        if(headerAnimationDrawable==null){
+            headerAnimationDrawable = (AnimationDrawable) ivHeaderProgress.getBackground();
+        }
+        headerAnimationDrawable.stop();
+
+
     }
 
     @Override
@@ -58,8 +65,10 @@ public class DefaultLoadingLayout implements ILoadingLayout {
         ivFooterArrow.setVisibility(View.VISIBLE);
         ivFooterArrow.setRotation(0);
         ivFooterProgress.setVisibility(View.INVISIBLE);
-        AnimationDrawable drawable = (AnimationDrawable) ivFooterProgress.getBackground();
-        drawable.stop();
+        if(footerAnimdrawable==null){
+            footerAnimdrawable = (AnimationDrawable) ivFooterProgress.getBackground();
+        }
+        footerAnimdrawable.stop();
     }
 
     @Override
@@ -79,8 +88,7 @@ public class DefaultLoadingLayout implements ILoadingLayout {
         tvHeaderState.setText("正在刷新...");
         ivHeaderArrow.setVisibility(View.INVISIBLE);
         ivHeaderProgress.setVisibility(View.VISIBLE);
-        AnimationDrawable drawable = (AnimationDrawable) ivHeaderProgress.getBackground();
-        drawable.start();
+        headerAnimationDrawable.start();
     }
 
     @Override
@@ -88,8 +96,7 @@ public class DefaultLoadingLayout implements ILoadingLayout {
         tvFooterState.setText("正在加载...");
         ivFooterArrow.setVisibility(View.INVISIBLE);
         ivFooterProgress.setVisibility(View.VISIBLE);
-        AnimationDrawable drawable = (AnimationDrawable) ivFooterProgress.getBackground();
-        drawable.start();
+        footerAnimdrawable.start();
     }
 
 }

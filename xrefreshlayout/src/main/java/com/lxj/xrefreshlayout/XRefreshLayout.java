@@ -58,6 +58,9 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
 
 
     protected void initLoadingLayout() {
+        if(header!=null)removeView(header);
+        if(footer!=null)removeView(footer);
+
         header = loadingLayout.createLoadingHeader(getContext(), this);
         footer = loadingLayout.createLoadingFooter(getContext(), this);
 
@@ -124,6 +127,8 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
 
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+        loadingLayout.initAndResetHeader();
+        loadingLayout.initAndResetFooter();
         isPullHeader = false;
         isPullFooter = false;
         return true;
@@ -136,8 +141,6 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
      */
     @Override
     public void onStopNestedScroll(View child) {
-        L.d("onStopNestedScroll  isRelease:"+isRelease + "   isPullHeader:"+isPullHeader
-        +"  isPullFooter: "+isPullFooter);
         isRelease = true;
         if (isPullHeader) {
             if (getScrollY() <= -header.getMeasuredHeight()) {
@@ -309,7 +312,10 @@ public class XRefreshLayout extends FrameLayout implements NestedScrollingParent
      * @param loadingLayout
      */
     public void setLoadingLayout(ILoadingLayout loadingLayout) {
+        if(isRelease && isSmoothScrolling)return;
         this.loadingLayout = loadingLayout;
+        initLoadingLayout();
+        requestLayout();
     }
 
     /**

@@ -34,6 +34,12 @@ A refresh layout, can refresh RecyclerView for all LayoutManager, NestedScrollVi
 
 
 
+- custom refresh animation! There is two animation style now, I will support more animation in future...
+
+  ![custom_anim](/Screenshot/custom_anim.gif)
+
+
+
 
 
 # Depedency

@@ -12,11 +12,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_recyclerview)
-    Button btnRecyclerview;
-    @BindView(R.id.btn_scrollview)
-    Button btnScrollview;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_recyclerview, R.id.btn_scrollview})
+    @OnClick({R.id.btn_recyclerview, R.id.btn_scrollview, R.id.btn_animation})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -33,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_scrollview:
                 intent = new Intent(this,NestedScrollViewActivity.class);
+                break;
+            case R.id.btn_animation:
+                intent = new Intent(this,CustomRefreshAnimActivity.class);
                 break;
         }
         intent.putExtra("title",((Button)view).getText().toString());
