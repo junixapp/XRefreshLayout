@@ -2,6 +2,7 @@ package com.xrefreshlayout.sample;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,35 +12,30 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.lxj.easyadapter.CommonAdapter;
+import com.lxj.easyadapter.ViewHolder;
 import com.lxj.xrefreshlayout.XRefreshLayout;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by dance on 2017/4/3.
  */
 
 public class RecyclerViewActivity extends AppCompatActivity {
-    @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
 
     ArrayList<String> list = new ArrayList<>();
-    @BindView(R.id.xrefreshLayout)
     XRefreshLayout xrefreshLayout;
-    private MyAdapter myAdapter;
+    private CommonAdapter<String> myAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
-        ButterKnife.bind(this);
+        recyclerview = findViewById(R.id.recyclerview);
+        xrefreshLayout = findViewById(R.id.xrefreshLayout);
 
         initView();
 
@@ -59,7 +55,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
         });
 
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
-        myAdapter = new MyAdapter(list);
+        myAdapter = new CommonAdapter<String>(R.layout.adapter_list, list) {
+            @Override
+            protected void convert(@NonNull ViewHolder holder, @NonNull String s, int position) {
+                holder.setText(R.id.tv_text, s);
+            }
+        };
         recyclerview.setAdapter(myAdapter);
 
     }

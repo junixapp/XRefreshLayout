@@ -13,22 +13,19 @@ import com.lxj.xrefreshlayout.XRefreshLayout;
 import com.lxj.xrefreshlayout.loadinglayout.DefaultLoadingLayout;
 import com.lxj.xrefreshlayout.loadinglayout.CircleLoadingLayout;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by dance on 2017/5/8.
  */
 
 public class CustomRefreshAnimActivity extends AppCompatActivity {
-    @BindView(R.id.xrefreshLayout)
     XRefreshLayout xrefreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_refresh_anim);
-        ButterKnife.bind(this);
+        xrefreshLayout = findViewById(R.id.xrefreshLayout);
 
 
 

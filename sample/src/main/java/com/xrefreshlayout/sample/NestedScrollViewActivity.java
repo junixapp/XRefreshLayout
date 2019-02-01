@@ -10,24 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.lxj.xrefreshlayout.XRefreshLayout;
-import com.lxj.xrefreshlayout.loadinglayout.ILoadingLayout;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by dance on 2017/4/3.
  */
 
 public class NestedScrollViewActivity extends AppCompatActivity {
-    @BindView(R.id.xrefreshLayout)
     XRefreshLayout xrefreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nestedscrollview);
-        ButterKnife.bind(this);
+        xrefreshLayout = findViewById(R.id.xrefreshLayout);
 
         xrefreshLayout.setOnRefreshListener(new XRefreshLayout.OnRefreshListener() {
             @Override

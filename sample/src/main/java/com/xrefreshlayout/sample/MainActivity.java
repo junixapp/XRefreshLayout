@@ -6,21 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        findViewById(R.id.btn_recyclerview).setOnClickListener(this);
+        findViewById(R.id.btn_scrollview).setOnClickListener(this);
+        findViewById(R.id.btn_animation).setOnClickListener(this);
     }
 
-    @OnClick({R.id.btn_recyclerview, R.id.btn_scrollview, R.id.btn_animation})
-    public void onViewClicked(View view) {
+
+
+    @Override
+    public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.btn_recyclerview:
@@ -36,5 +37,4 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("title",((Button)view).getText().toString());
         startActivity(intent);
     }
-
 }
