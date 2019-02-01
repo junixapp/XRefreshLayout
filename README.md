@@ -42,26 +42,10 @@ A refresh layout, can refresh RecyclerView for all LayoutManager, NestedScrollVi
 
 
 
-# Depedency
-
-**Step 1. Add it in your root build.gradle at the end of repositories:**
-
-```groovy
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
-
-**Step 2.** **Add the dependency**
-
- [![](https://jitpack.io/v/li-xiaojun/XRefreshLayout.svg)](https://jitpack.io/#li-xiaojun/XRefreshLayout)
-
+# Gradle
 ```groovy
 dependencies {
-	compile 'com.github.li-xiaojun:XRefreshLayout:lastest release here'
+	compile 'com.lxj:xrefreshlayout:0.0.1'
 }
 ```
 
